@@ -23,6 +23,7 @@ body{
     width:340px;
     height:240px;
     perspective:1200px;
+    z-index:2;
 }
 
 /* SOBRE */
@@ -133,10 +134,59 @@ body{
         opacity:0;
     }
 }
+
+/* IMÁGENES DECORATIVAS */
+.decoracion{
+    position:fixed;
+    width:120px;
+    z-index:0;
+    opacity:0.95;
+    transition: transform 0.4s ease;
+    animation:flotar 4s ease-in-out infinite;
+}
+
+.decoracion:hover{
+    transform:scale(1.1) rotate(5deg);
+}
+
+/* Posiciones */
+.deco1{
+    top:20px;
+    left:20px;
+}
+
+.deco2{
+    top:20px;
+    right:20px;
+}
+
+.deco3{
+    bottom:20px;
+    right:20px;
+}
+
+.deco4{
+    bottom:20px;
+    left:20px;
+}
+
+/* Animación flotar */
+@keyframes flotar{
+    0%{ transform:translateY(0px); }
+    50%{ transform:translateY(-12px); }
+    100%{ transform:translateY(0px); }
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- DECORACIONES -->
+<img src="gatito.png" class="decoracion deco1">
+<img src="oso-rosa.png" class="decoracion deco2">
+<img src="rilakkuma-like.png" class="decoracion deco3">
+<img src="ositos-abrazo.png" class="decoracion deco4">
 
 <div class="contenedor" onclick="abrirCarta()" id="contenedor">
     <div class="sobre">
@@ -149,13 +199,13 @@ body{
             <p>
             Mi amor,<br><br>
             Hoy cumple 17 añitos la persona que mas amo en este mundo,
-            no sabes lo agradecido que estoy de tenerte en mi vida
-            Gracias a ti he aprendido que el amor es hermoso
-            me has enseñado a amar y aunque aun no soy perfecto
-            creeme que me encanta tenerte en mi vida
+            no sabes lo agradecido que estoy de tenerte en mi vida.
+            Gracias a ti he aprendido que el amor es hermoso,
+            me has enseñado a amar y aunque aun no soy perfecto,
+            creeme que me encanta tenerte en mi vida.
             <br><br>
-            Gracias por amarme y estar para siempre para mi
-            te mando mil millones de abrazos y besitos mi niña<br><br>
+            Gracias por amarme y estar para siempre para mi,
+            te mando mil millones de abrazos y besitos mi niña.<br><br>
             Prometo seguir cuidándote,
             apoyándote y amándote siempre.<br><br>
             💕 Te amo infinitamente, mi princesa hermosa 💕
@@ -178,20 +228,15 @@ function abrirCarta(){
 
     contenedor.classList.add("abierto");
 
-    // Sonido
     latido.play();
-
-    // Corazón gigante
     corazon.classList.add("animar-corazon");
 
-    // Después del corazón mostrar carta
     setTimeout(()=>{
         carta.classList.add("mostrar-carta");
         lanzarPetalos();
     },1300);
 }
 
-/* Pétalos */
 function lanzarPetalos(){
     for(let i=0;i<25;i++){
         setTimeout(()=>{
@@ -212,5 +257,3 @@ function lanzarPetalos(){
 
 </body>
 </html>
-
-
