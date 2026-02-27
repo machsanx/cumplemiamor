@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Naydely 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#f8cdda,#f7a1c4);
+    font-family:'Segoe UI', sans-serif;
+    overflow:hidden;
+}
+
+/* CONTENEDOR */
+.contenedor{
+    position:relative;
+    width:340px;
+    height:240px;
+    perspective:1200px;
+}
+
+/* SOBRE */
+.sobre{
+    width:100%;
+    height:100%;
+    background:#f06d8d;
+    border-radius:14px;
+    position:absolute;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    cursor:pointer;
+}
+
+/* TAPA */
+.tapa{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#e85c82;
+    clip-path:polygon(0 0,50% 65%,100% 0);
+    transform-origin:top;
+    transition:1s ease;
+    border-radius:14px 14px 0 0;
+    z-index:3;
+}
+
+/* CARTA */
+.carta{
+    position:absolute;
+    width:92%;
+    min-height:260px;
+    background:white;
+    top:4%;
+    left:4%;
+    border-radius:14px;
+    padding:25px;
+    box-sizing:border-box;
+    text-align:center;
+    transform:translateY(120%);
+    opacity:0;
+    transition:1s ease;
+    z-index:1;
+    box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+.carta h2{
+    color:#e85c82;
+}
+
+.carta p{
+    color:#444;
+    font-size:15px;
+    line-height:1.6;
+}
+
+/* CORAZÓN GIGANTE */
+.corazon-grande{
+    position:fixed;
+    font-size:20px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    z-index:10;
+    opacity:0;
+}
+
+/* ANIMACIONES */
+.abierto .tapa{
+    transform:rotateX(180deg);
+}
+
+.mostrar-carta{
+    transform:translateY(-110px) !important;
+    opacity:1 !important;
+}
+
+/* Animación corazón */
+.animar-corazon{
+    animation:latidoGrande 1.5s ease forwards;
+}
+
+@keyframes latidoGrande{
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+        opacity:0;
+    }
+    50%{
+        transform:translate(-50%,-50%) scale(8);
+        opacity:1;
+    }
+    100%{
+        transform:translate(-50%,-50%) scale(0);
+        opacity:0;
+    }
+}
+
+/* PÉTALOS */
+.petalo{
+    position:absolute;
+    top:-20px;
+    font-size:20px;
+    animation:caer linear forwards;
+}
+
+@keyframes caer{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor" onclick="abrirCarta()" id="contenedor">
+    <div class="sobre">
+        <div class="tapa"></div>
+
+        <div class="carta" id="carta">
+            <h2>Feliz 17 Naydely 💖</h2>
+            <p>
+            Mi amor,<br><br>
+            Hoy celebramos 17 años de la persona
+            que cambió mi vida desde el 2 de agosto de 2025.<br><br>
+            Gracias por cada sonrisa, cada abrazo
+            y cada momento juntos.<br><br>
+            Prometo seguir cuidándote,
+            apoyándote y amándote siempre.<br><br>
+            💕 Te amo infinitamente, mi princesa hermosa 💕
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="corazon-grande" id="corazonGrande">💖</div>
+
+<audio id="latido" src="https://www.soundjay.com/human/heartbeat-01a.mp3"></audio>
+
+<script>
+
+function abrirCarta(){
+    const contenedor=document.getElementById("contenedor");
+    const carta=document.getElementById("carta");
+    const corazon=document.getElementById("corazonGrande");
+    const latido=document.getElementById("latido");
+
+    contenedor.classList.add("abierto");
+
+    // Sonido
+    latido.play();
+
+    // Corazón gigante
+    corazon.classList.add("animar-corazon");
+
+    // Después del corazón mostrar carta
+    setTimeout(()=>{
+        carta.classList.add("mostrar-carta");
+        lanzarPetalos();
+    },1300);
+}
+
+/* Pétalos */
+function lanzarPetalos(){
+    for(let i=0;i<25;i++){
+        setTimeout(()=>{
+            const petalo=document.createElement("div");
+            petalo.classList.add("petalo");
+            petalo.innerHTML="🌸";
+            petalo.style.left=Math.random()*100+"vw";
+            petalo.style.fontSize=(Math.random()*15+15)+"px";
+            petalo.style.animationDuration=(Math.random()*3+4)+"s";
+            document.body.appendChild(petalo);
+
+            setTimeout(()=>{petalo.remove();},7000);
+        },i*120);
+    }
+}
+
+</script>
+
+</body>
+</html>
