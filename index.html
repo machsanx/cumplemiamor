@@ -20,10 +20,10 @@ body{
 /* CONTENEDOR */
 .contenedor{
     position:relative;
-    width:340px;
-    height:240px;
+    width:95%;
+    max-width:360px;
+    height:260px;
     perspective:1200px;
-    z-index:2;
 }
 
 /* SOBRE */
@@ -54,32 +54,74 @@ body{
 .carta{
     position:absolute;
     width:92%;
-    min-height:260px;
+    min-height:320px;
     background:white;
     top:4%;
     left:4%;
     border-radius:14px;
-    padding:25px;
+    padding:20px;
     box-sizing:border-box;
     text-align:center;
     transform:translateY(120%);
     opacity:0;
     transition:1s ease;
-    z-index:1;
+    z-index:2;
     box-shadow:0 15px 30px rgba(0,0,0,0.2);
 }
 
 .carta h2{
     color:#e85c82;
+    margin-top:10px;
 }
 
 .carta p{
     color:#444;
-    font-size:15px;
+    font-size:14px;
     line-height:1.6;
 }
 
-/* CORAZÓN GIGANTE */
+/* IMAGEN ARRIBA */
+.img-arriba{
+    width:110px;
+    position:absolute;
+    top:-70px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:4;
+}
+
+/* LADOS */
+.lado-izq, .lado-der{
+    width:70px;
+    position:absolute;
+    top:90px;
+}
+
+.lado-izq{
+    left:-60px;
+}
+
+.lado-der{
+    right:-60px;
+}
+
+/* ABAJO */
+.img-abajo{
+    width:100px;
+    margin-top:15px;
+}
+
+/* ANIMACIONES */
+.abierto .tapa{
+    transform:rotateX(180deg);
+}
+
+.mostrar-carta{
+    transform:translateY(-140px) !important;
+    opacity:1 !important;
+}
+
+/* CORAZÓN */
 .corazon-grande{
     position:fixed;
     font-size:20px;
@@ -90,34 +132,14 @@ body{
     opacity:0;
 }
 
-/* ANIMACIONES */
-.abierto .tapa{
-    transform:rotateX(180deg);
-}
-
-.mostrar-carta{
-    transform:translateY(-110px) !important;
-    opacity:1 !important;
-}
-
-/* Animación corazón */
 .animar-corazon{
     animation:latidoGrande 1.5s ease forwards;
 }
 
 @keyframes latidoGrande{
-    0%{
-        transform:translate(-50%,-50%) scale(0);
-        opacity:0;
-    }
-    50%{
-        transform:translate(-50%,-50%) scale(8);
-        opacity:1;
-    }
-    100%{
-        transform:translate(-50%,-50%) scale(0);
-        opacity:0;
-    }
+    0%{ transform:translate(-50%,-50%) scale(0); opacity:0; }
+    50%{ transform:translate(-50%,-50%) scale(8); opacity:1; }
+    100%{ transform:translate(-50%,-50%) scale(0); opacity:0; }
 }
 
 /* PÉTALOS */
@@ -134,82 +156,44 @@ body{
         opacity:0;
     }
 }
-
-/* IMÁGENES DECORATIVAS */
-.decoracion{
-    position:fixed;
-    width:120px;
-    z-index:0;
-    opacity:0.95;
-    transition: transform 0.4s ease;
-    animation:flotar 4s ease-in-out infinite;
-}
-
-.decoracion:hover{
-    transform:scale(1.1) rotate(5deg);
-}
-
-/* Posiciones */
-.deco1{
-    top:20px;
-    left:20px;
-}
-
-.deco2{
-    top:20px;
-    right:20px;
-}
-
-.deco3{
-    bottom:20px;
-    right:20px;
-}
-
-.deco4{
-    bottom:20px;
-    left:20px;
-}
-
-/* Animación flotar */
-@keyframes flotar{
-    0%{ transform:translateY(0px); }
-    50%{ transform:translateY(-12px); }
-    100%{ transform:translateY(0px); }
-}
-
 </style>
 </head>
 
 <body>
-
-<!-- DECORACIONES -->
-<img src="gatito.png" class="decoracion deco1">
-<img src="oso-rosa.png" class="decoracion deco2">
-<img src="rilakkuma-like.png" class="decoracion deco3">
-<img src="ositos-abrazo.png" class="decoracion deco4">
 
 <div class="contenedor" onclick="abrirCarta()" id="contenedor">
     <div class="sobre">
         <div class="tapa"></div>
 
         <div class="carta" id="carta">
-            <br><br>
-            <br><br>
+
+            <!-- Imagen arriba -->
+            <img src="ambos.png" class="img-arriba">
+
+            <!-- Lados -->
+            <img src="rilakkuma.png" class="lado-izq">
+            <img src="korilakkuma.png" class="lado-der">
+
             <h2>Feliz 17 Naydely 💖</h2>
+
             <p>
             Mi amor,<br><br>
-            Hoy cumple 17 añitos la persona que mas amo en este mundo,
+            Hoy cumple 17 añitos la persona que más amo en este mundo,
             no sabes lo agradecido que estoy de tenerte en mi vida.
             Gracias a ti he aprendido que el amor es hermoso,
-            me has enseñado a amar y aunque aun no soy perfecto,
-            creeme que me encanta tenerte en mi vida.
+            me has enseñado a amar y aunque aún no soy perfecto,
+            créeme que me encanta tenerte en mi vida.
             <br><br>
-            Gracias por amarme y estar para siempre para mi,
+            Gracias por amarme y estar para siempre para mí,
             te mando mil millones de abrazos y besitos mi niña.<br><br>
             Prometo seguir cuidándote,
             apoyándote y amándote siempre.<br><br>
             💕 Te amo infinitamente, mi princesa hermosa 💕
             </p>
+
+            <!-- Imagen abajo -->
+            <img src="pusheen.png" class="img-abajo">
+
         </div>
     </div>
 </div>
@@ -219,7 +203,6 @@ body{
 <audio id="latido" src="https://www.soundjay.com/human/heartbeat-01a.mp3"></audio>
 
 <script>
-
 function abrirCarta(){
     const contenedor=document.getElementById("contenedor");
     const carta=document.getElementById("carta");
@@ -227,7 +210,6 @@ function abrirCarta(){
     const latido=document.getElementById("latido");
 
     contenedor.classList.add("abierto");
-
     latido.play();
     corazon.classList.add("animar-corazon");
 
@@ -252,7 +234,6 @@ function lanzarPetalos(){
         },i*120);
     }
 }
-
 </script>
 
 </body>
